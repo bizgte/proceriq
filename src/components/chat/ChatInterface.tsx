@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import MessageBubble from './MessageBubble'
 import SpaceToggle from './SpaceToggle'
 import ModelSelector from './ModelSelector'
-import type { ModelTier } from '@/lib/models'
+import type { ModelId } from '@/lib/models'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -22,7 +22,7 @@ export default function ChatInterface() {
   ])
   const [input, setInput] = useState('')
   const [space, setSpace] = useState('work')
-  const [model, setModel] = useState<ModelTier>('small')
+  const [model, setModel] = useState<ModelId>('openai/gpt-4o-mini')
   const [isStreaming, setIsStreaming] = useState(false)
   const [streamingContent, setStreamingContent] = useState('')
   const bottomRef = useRef<HTMLDivElement>(null)
@@ -59,7 +59,7 @@ export default function ChatInterface() {
         body: JSON.stringify({
           message: userMessage,
           space,
-          model_tier: model,
+          model,
           history
         })
       })
@@ -198,7 +198,7 @@ export default function ChatInterface() {
           </button>
         </div>
         <p className="text-xs text-gray-700 mt-2 text-center">
-          Messages in <strong className="text-gray-600">{space}</strong> space · <strong className="text-gray-600">{model}</strong> model · Memories saved automatically
+          Messages in <strong className="text-gray-600">{space}</strong> space · Memories saved automatically
         </p>
       </div>
     </div>

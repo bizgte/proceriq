@@ -7,6 +7,7 @@ const navItems = [
   { href: '/dashboard', icon: '💬', label: 'Chat' },
   { href: '/dashboard/memories', icon: '🧠', label: 'Memories' },
   { href: '/dashboard/activity', icon: '⚡', label: 'Activity' },
+  { href: '/dashboard/documents', icon: '📄', label: 'Documents' },
   { href: '/dashboard/config', icon: '⚙️', label: 'Config' },
 ]
 

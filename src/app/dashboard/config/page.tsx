@@ -5,6 +5,8 @@ export const dynamic = 'force-dynamic'
 import { useState } from 'react'
 import { MODEL_MAP, MODEL_LABELS, type ModelTier } from '@/lib/models'
 
+
+
 interface ApiKey {
   id: string
   label: string
@@ -46,6 +48,26 @@ export default function ConfigPage() {
   }
 
   const tiers: ModelTier[] = ['small', 'medium', 'large']
+  const [webhookStatus, setWebhookStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
+  const [settingWebhook, setSettingWebhook] = useState(false)
+
+  const setWebhook = async () => {
+    setSettingWebhook(true)
+    setWebhookStatus(null)
+    try {
+      const res = await fetch('/api/telegram/setup', { method: 'POST' })
+      const data = await res.json()
+      if (data.ok) {
+        setWebhookStatus({ type: 'success', message: '✅ Webhook set! Message your bot to start chatting.' })
+      } else {
+        setWebhookStatus({ type: 'error', message: data.error || data.description || 'Failed to set webhook' })
+      }
+    } catch {
+      setWebhookStatus({ type: 'error', message: 'Request failed. Check your token and try again.' })
+    } finally {
+      setSettingWebhook(false)
+    }
+  }
 
   return (
     <div className="h-full overflow-y-auto">
@@ -124,6 +146,46 @@ export default function ConfigPage() {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* Telegram Bot */}
+        <section className="bg-gray-900 border border-gray-800 rounded-2xl p-6 mb-6">
+          <h2 className="text-lg font-semibold text-white mb-1">🤖 Telegram Bot</h2>
+          <p className="text-gray-500 text-sm mb-4">Chat with Proceriq directly from Telegram with full memory access</p>
+
+          <ol className="space-y-3 mb-5">
+            {[
+              { n: 1, text: 'Create a bot via @BotFather on Telegram and copy your token' },
+              { n: 2, text: 'Add TELEGRAM_BOT_TOKEN=<your-token> to your Vercel environment variables' },
+              { n: 3, text: 'Click "Set Webhook" below to connect Telegram to this app' },
+              { n: 4, text: 'Message your bot — it will respond with memory!' },
+            ].map(step => (
+              <li key={step.n} className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-6 h-6 bg-indigo-600/20 border border-indigo-500/30 text-indigo-400 rounded-full text-xs flex items-center justify-center font-bold">
+                  {step.n}
+                </span>
+                <span className="text-gray-300 text-sm">{step.text}</span>
+              </li>
+            ))}
+          </ol>
+
+          {webhookStatus && (
+            <div className={`rounded-xl px-4 py-3 text-sm mb-4 ${
+              webhookStatus.type === 'success'
+                ? 'bg-green-950/50 text-green-300 border border-green-800'
+                : 'bg-red-950/50 text-red-300 border border-red-800'
+            }`}>
+              {webhookStatus.message}
+            </div>
+          )}
+
+          <button
+            onClick={setWebhook}
+            disabled={settingWebhook}
+            className="bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-800 disabled:cursor-not-allowed text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+          >
+            {settingWebhook ? 'Setting webhook…' : '🔗 Set Webhook'}
+          </button>
         </section>
 
         {/* Account info */}

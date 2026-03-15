@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 
 export async function POST(req: Request) {
   try {
-    const { message, space, model_tier, history } = await req.json()
+    const { message, space, model: modelParam, model_tier, history } = await req.json()
 
     const userId = 'demo-user'
 
@@ -30,8 +30,8 @@ ${memoryContext || 'No relevant memories yet. Start chatting to build your secon
       { role: 'user', content: message }
     ]
 
-    const modelTier = (model_tier as keyof typeof MODEL_MAP) || 'small'
-    const model = MODEL_MAP[modelTier] || MODEL_MAP.small
+    // Accept full model ID (new) or fall back to model_tier (legacy), then default
+    const model = modelParam || (model_tier ? MODEL_MAP[model_tier as keyof typeof MODEL_MAP] : null) || MODEL_MAP.small
 
     const response = await fetch(`${OPENROUTER_BASE}/chat/completions`, {
       method: 'POST',
