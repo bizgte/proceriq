@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { createClient } from '@/lib/supabase/server'
+import { createServerClient as createClient } from '@/lib/supabase/server'
 import { formatDistanceToNow } from 'date-fns'
 import type { Metadata } from 'next'
 

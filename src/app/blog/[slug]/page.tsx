@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
+import { createServerClient as createClient } from '@/lib/supabase/server'
 import { format } from 'date-fns'
 import type { Metadata } from 'next'
 import BlogContent from './BlogContent'
