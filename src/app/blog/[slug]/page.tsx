@@ -85,6 +85,30 @@ export default async function BlogPostPage({ params }: Props) {
           </p>
         </div>
 
+        {/* Hero image */}
+        {post.image_url && (
+          <div className="rounded-xl overflow-hidden mb-10 border border-gray-800">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={post.image_url}
+              alt={post.title}
+              className="w-full object-cover max-h-[420px]"
+            />
+          </div>
+        )}
+
+        {/* Hero video */}
+        {post.video_url && (
+          <div className="rounded-xl overflow-hidden mb-10 border border-gray-800 aspect-video">
+            <iframe
+              src={post.video_url}
+              className="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        )}
+
         {/* Content */}
         <BlogContent content={post.content} />
 

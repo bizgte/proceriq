@@ -14,7 +14,7 @@ export default async function BlogPage() {
   const supabase = createClient()
   const { data: posts, error } = await supabase
     .from('blog_posts')
-    .select('slug, title, excerpt, published_at')
+    .select('slug, title, excerpt, published_at, image_url')
     .order('published_at', { ascending: false })
     .limit(20)
 
@@ -65,9 +65,19 @@ export default async function BlogPage() {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group block bg-gray-900/50 hover:bg-gray-900 border border-gray-800 hover:border-indigo-500/40 rounded-xl p-6 transition-all duration-200"
+                className="group block bg-gray-900/50 hover:bg-gray-900 border border-gray-800 hover:border-indigo-500/40 rounded-xl overflow-hidden transition-all duration-200"
               >
-                <div className="flex items-start justify-between gap-4">
+                {post.image_url && (
+                  <div className="w-full h-48 overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={post.image_url}
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                )}
+                <div className="p-6 flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
                     <h2 className="text-lg font-semibold text-white group-hover:text-indigo-300 transition-colors mb-2 leading-snug">
                       {post.title}
