@@ -7,7 +7,7 @@ interface ModelSelectorProps {
   onChange: (model: ModelId) => void
 }
 
-// Group models by provider
+// Group models by provider (OpenRouter/Auto first)
 const providers = Array.from(new Set(ALL_MODELS.map(m => m.provider)))
 
 export default function ModelSelector({ model, onChange }: ModelSelectorProps) {
@@ -24,7 +24,7 @@ export default function ModelSelector({ model, onChange }: ModelSelectorProps) {
           <optgroup key={provider} label={provider}>
             {ALL_MODELS.filter(m => m.provider === provider).map(m => (
               <option key={m.id} value={m.id}>
-                {m.name}
+                {m.provider === 'OpenRouter' ? '🔀 ' : ''}{m.name}{(m as any).description ? ' — ' + (m as any).description : ''}
               </option>
             ))}
           </optgroup>

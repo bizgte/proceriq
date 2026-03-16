@@ -1,4 +1,5 @@
-import { fetchMemoryContext, saveMemory } from '@/lib/memory'
+import { getAuthUserId } from '@/lib/auth'
+import { fetchMemoryContext, saveMemory, classifySpace } from '@/lib/memory'
 import { MODEL_MAP } from '@/lib/models'
 import { getOpenRouterHeaders, OPENROUTER_BASE } from '@/lib/openrouter'
 
@@ -9,7 +10,8 @@ export async function POST(req: Request) {
   try {
     const { message, space, model: modelParam, model_tier, history } = await req.json()
 
-    const userId = 'demo-user'
+    const userId = await getAuthUserId()
+    if (!userId) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
 
     const memoryContext = await fetchMemoryContext(userId, message, space || 'work')
     const memoryCount = memoryContext ? memoryContext.split('\n').filter(Boolean).length : 0
@@ -48,9 +50,12 @@ ${memoryContext || 'No relevant memories yet. Start chatting to build your secon
       return new Response(JSON.stringify({ error: err }), { status: response.status })
     }
 
-    // Save memory async (fire and forget)
+    // Save memory async (fire and forget, auto-classify if space='auto')
     if (message && message.length > 30) {
-      saveMemory(userId, message, space || 'work', { source: 'chat', role: 'user' }).catch(console.error)
+      const resolvedSpace = space === 'auto' || !space
+        ? classifySpace(message).then(s => saveMemory(userId, message, s, { source: 'chat', role: 'user', auto_classified: true }))
+        : saveMemory(userId, message, space, { source: 'chat', role: 'user' })
+      Promise.resolve(resolvedSpace).catch(console.error)
     }
 
     // Return memory count header so client knows how many memories were used

@@ -11,6 +11,9 @@ export default function LandingPage() {
             <span className="text-xl font-bold text-white">Proceriq</span>
           </div>
           <div className="flex items-center gap-4">
+            <Link href="/blog" className="text-gray-400 hover:text-white transition-colors">
+              Blog
+            </Link>
             <Link href="/auth/login" className="text-gray-400 hover:text-white transition-colors">
               Sign in
             </Link>

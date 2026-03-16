@@ -9,6 +9,7 @@ const navItems = [
   { href: '/dashboard/activity', icon: '⚡', label: 'Activity' },
   { href: '/dashboard/documents', icon: '📄', label: 'Documents' },
   { href: '/dashboard/config', icon: '⚙️', label: 'Config' },
+  { href: '/dashboard/how-to', icon: '📖', label: 'How-to' },
 ]
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
