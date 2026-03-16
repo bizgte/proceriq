@@ -6,7 +6,7 @@ export async function POST(_req: Request) {
     return Response.json({ error: 'TELEGRAM_BOT_TOKEN not set in environment' }, { status: 400 })
   }
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://proceriq.vercel.app'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://proceriq.com'
   const webhookUrl = `${appUrl}/api/telegram/webhook`
 
   const res = await fetch(`https://api.telegram.org/bot${token}/setWebhook`, {

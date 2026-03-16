@@ -63,7 +63,7 @@ export async function POST(req: Request) {
       }
     } else {
       // /start without token — welcome message
-      await sendTelegramMessage(chatId, `👋 Welcome to *Proceriq*!\n\nI'm your personal AI with persistent memory.\n\nTo get started, link your account from your Proceriq dashboard:\n👉 https://proceriq.vercel.app/dashboard/config\n\nThen click *"Connect Telegram"* and follow the instructions.`)
+      await sendTelegramMessage(chatId, `👋 Welcome to *Proceriq*!\n\nI'm your personal AI with persistent memory.\n\nTo get started, link your account from your Proceriq dashboard:\n👉 https://proceriq.com/dashboard/config\n\nThen click *"Connect Telegram"* and follow the instructions.`)
       return Response.json({ ok: true })
     }
   }
@@ -76,7 +76,7 @@ export async function POST(req: Request) {
     .single()
 
   if (!linkRecord) {
-    await sendTelegramMessage(chatId, `Please link your Telegram account first.\n\nGo to: https://proceriq.vercel.app/dashboard/config`)
+    await sendTelegramMessage(chatId, `Please link your Telegram account first.\n\nGo to: https://proceriq.com/dashboard/config`)
     return Response.json({ ok: true })
   }
 

@@ -78,7 +78,7 @@ export async function classifySpace(content: string): Promise<'work' | 'personal
       headers: {
         'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://proceriq.vercel.app',
+        'HTTP-Referer': 'https://proceriq.com',
         'X-Title': 'Proceriq'
       },
       body: JSON.stringify({

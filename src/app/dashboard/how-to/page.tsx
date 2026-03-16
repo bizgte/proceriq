@@ -39,13 +39,13 @@ export default function HowToPage() {
 
       <Section title="API" id="api">
         <p>Read and write memories from your own apps, automations, or scripts.</p>
-        <CodeBlock code="# Search memories&#10;curl https://proceriq.vercel.app/api/v1/memories?q=your+query \&#10;  -H 'Authorization: Bearer YOUR_API_KEY'&#10;&#10;# Save a memory&#10;curl -X POST https://proceriq.vercel.app/api/v1/memories \&#10;  -H 'Authorization: Bearer YOUR_API_KEY' \&#10;  -H 'Content-Type: application/json' \&#10;  -d '{&quot;content&quot;: &quot;My note&quot;, &quot;space&quot;: &quot;auto&quot;}'" />
+        <CodeBlock code="# Search memories&#10;curl https://proceriq.com/api/v1/memories?q=your+query \&#10;  -H 'Authorization: Bearer YOUR_API_KEY'&#10;&#10;# Save a memory&#10;curl -X POST https://proceriq.com/api/v1/memories \&#10;  -H 'Authorization: Bearer YOUR_API_KEY' \&#10;  -H 'Content-Type: application/json' \&#10;  -d '{&quot;content&quot;: &quot;My note&quot;, &quot;space&quot;: &quot;auto&quot;}'" />
         <p className="mt-2">Generate your API key in Settings.</p>
       </Section>
 
       <Section title="MCP — Claude Desktop / Cursor" id="mcp">
         <p>Add Proceriq as an MCP server so Claude Desktop or Cursor can query your memory automatically.</p>
-        <CodeBlock code="// ~/.claude/claude_desktop_config.json&#10;{&#10;  &quot;mcpServers&quot;: {&#10;    &quot;proceriq&quot;: {&#10;      &quot;url&quot;: &quot;https://proceriq.vercel.app/api/mcp&quot;,&#10;      &quot;headers&quot;: { &quot;Authorization&quot;: &quot;Bearer YOUR_API_KEY&quot; }&#10;    }&#10;  }&#10;}" />
+        <CodeBlock code="// ~/.claude/claude_desktop_config.json&#10;{&#10;  &quot;mcpServers&quot;: {&#10;    &quot;proceriq&quot;: {&#10;      &quot;url&quot;: &quot;https://proceriq.com/api/mcp&quot;,&#10;      &quot;headers&quot;: { &quot;Authorization&quot;: &quot;Bearer YOUR_API_KEY&quot; }&#10;    }&#10;  }&#10;}" />
         <p className="mt-2">Available tools: search_memory, save_memory, list_memories</p>
         <Callout>Get your API key from Settings first.</Callout>
       </Section>

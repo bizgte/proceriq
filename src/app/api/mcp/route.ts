@@ -127,7 +127,7 @@ export async function GET() {
     protocol: 'MCP 2024-11-05',
     tools: MCP_TOOLS.map(t => t.name),
     setup: {
-      url: 'https://proceriq.vercel.app/api/mcp',
+      url: 'https://proceriq.com/api/mcp',
       auth: 'Authorization: Bearer YOUR_API_KEY'
     }
   })
