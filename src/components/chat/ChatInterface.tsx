@@ -12,7 +12,7 @@ interface Message {
   memoryCount?: number
 }
 
-export default function ChatInterface() {
+export default function ChatInterface({ isPro = false }: { isPro?: boolean }) {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
@@ -136,7 +136,7 @@ export default function ChatInterface() {
       {/* Header */}
       <div className="border-b border-gray-800 px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
         <SpaceToggle space={space} onChange={setSpace} />
-        <ModelSelector model={model} onChange={setModel} />
+        <ModelSelector model={model} onChange={setModel} isPro={isPro} />
       </div>
 
       {/* Messages */}

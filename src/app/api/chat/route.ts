@@ -1,6 +1,7 @@
 import { getAuthUserId } from '@/lib/auth'
 import { fetchMemoryContext, saveMemory, classifySpace } from '@/lib/memory'
-import { MODEL_MAP } from '@/lib/models'
+import { MODEL_MAP, isModelAllowed } from '@/lib/models'
+import { createClient } from '@supabase/supabase-js'
 import { getOpenRouterHeaders, OPENROUTER_BASE } from '@/lib/openrouter'
 
 export const runtime = 'nodejs'
@@ -12,6 +13,14 @@ export async function POST(req: Request) {
 
     const userId = await getAuthUserId()
     if (!userId) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
+
+    // Check user plan and validate model access
+    const supabaseAdmin = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
+    const { data: { user: authUser } } = await supabaseAdmin.auth.admin.getUserById(userId)
+    const isPro = authUser?.user_metadata?.plan === 'pro' || authUser?.user_metadata?.subscribed === true
+    if (modelParam && !isModelAllowed(modelParam, isPro)) {
+      return new Response(JSON.stringify({ error: 'Model requires Pro plan', upgrade: true }), { status: 403 })
+    }
 
     const memoryContext = await fetchMemoryContext(userId, message, space || 'work')
     const memoryCount = memoryContext ? memoryContext.split('\n').filter(Boolean).length : 0
