@@ -119,7 +119,7 @@ function ChibiMesh({ catState }: { catState: string }) {
 
         {/* ── Eyes ── on the front face (+Z hemisphere) */}
         <mesh ref={eyeLRef} castShadow material={eyeMat}
-              position={[-0.38, 0.12, 1.42]} scale={[0.22, 0.22, 0.10]}>
+              position={[-0.38, 0.12, 1.48]} scale={[0.18, 0.18, 0.02]}>
           <sphereGeometry args={[1, 24, 24]} />
         </mesh>
         {/* Left eye shine */}
@@ -128,7 +128,7 @@ function ChibiMesh({ catState }: { catState: string }) {
         </mesh>
 
         <mesh ref={eyeRRef} castShadow material={eyeMat}
-              position={[0.38, 0.12, 1.42]} scale={[0.22, 0.22, 0.10]}>
+              position={[0.38, 0.12, 1.48]} scale={[0.18, 0.18, 0.02]}>
           <sphereGeometry args={[1, 24, 24]} />
         </mesh>
         {/* Right eye shine */}
@@ -163,12 +163,6 @@ function ChibiMesh({ catState }: { catState: string }) {
         <mesh castShadow material={bodyMat} scale={[0.32, 0.28, 0.30]}>
           <sphereGeometry args={[1, 20, 20]} />
         </mesh>
-        {/* Paw beans */}
-        {[-0.1, 0, 0.1].map((ox, i) => (
-          <mesh key={i} material={earMat} position={[ox, -0.30, 0.18]} scale={[0.07, 0.05, 0.06]}>
-            <sphereGeometry args={[1, 10, 10]} />
-          </mesh>
-        ))}
       </group>
 
       {/* ── RIGHT ARM ── */}
@@ -176,27 +170,7 @@ function ChibiMesh({ catState }: { catState: string }) {
         <mesh castShadow material={bodyMat} scale={[0.32, 0.28, 0.30]}>
           <sphereGeometry args={[1, 20, 20]} />
         </mesh>
-        {[-0.1, 0, 0.1].map((ox, i) => (
-          <mesh key={i} material={earMat} position={[ox, -0.30, 0.18]} scale={[0.07, 0.05, 0.06]}>
-            <sphereGeometry args={[1, 10, 10]} />
-          </mesh>
-        ))}
       </group>
-
-      {/* ── LEGS / FEET ── */}
-      {([-0.50, 0.50] as number[]).map((x, i) => (
-        <group key={i} position={[x, -0.90, 0.12]}>
-          <mesh castShadow material={bodyMat} scale={[0.40, 0.34, 0.42]}>
-            <sphereGeometry args={[1, 20, 20]} />
-          </mesh>
-          {[-0.10, 0.02, 0.14].map((ox, j) => (
-            <mesh key={j} material={earMat}
-                  position={[ox, -0.32, 0.32]} scale={[0.08, 0.06, 0.07]}>
-              <sphereGeometry args={[1, 10, 10]} />
-            </mesh>
-          ))}
-        </group>
-      ))}
 
       {/* ── TAIL ── behind the body (-Z) curling up */}
       <group ref={tailRef} position={[0.55, -0.30, -0.80]}>
