@@ -172,7 +172,7 @@ function ChibiMesh({ catState }: { catState: string }) {
       ))}
 
       {/* ── Tail ── */}
-      <group ref={tailRef} position={[0.7, 0, -0.55]} style={{ transformOrigin: '0 0 0' }}>
+      <group ref={tailRef} position={[0.7, 0, -0.55]}>
         <mesh castShadow material={bodyMat}
               position={[0.4, 0, 0.3]}
               rotation={[0, 0, Math.PI / 4]}
