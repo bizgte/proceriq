@@ -119,7 +119,7 @@ function ChibiMesh({ catState }: { catState: string }) {
 
         {/* ── Eyes ── on the front face (+Z hemisphere) */}
         <mesh ref={eyeLRef} castShadow material={eyeMat}
-              position={[-0.38, 0.12, 1.02]} scale={[0.19, 0.24, 0.10]}>
+              position={[-0.38, 0.12, 1.02]} scale={[0.20, 0.14, 0.10]}>
           <sphereGeometry args={[1, 24, 24]} />
         </mesh>
         {/* Left eye shine */}
@@ -128,7 +128,7 @@ function ChibiMesh({ catState }: { catState: string }) {
         </mesh>
 
         <mesh ref={eyeRRef} castShadow material={eyeMat}
-              position={[0.38, 0.12, 1.02]} scale={[0.19, 0.24, 0.10]}>
+              position={[0.38, 0.12, 1.02]} scale={[0.20, 0.14, 0.10]}>
           <sphereGeometry args={[1, 24, 24]} />
         </mesh>
         {/* Right eye shine */}
