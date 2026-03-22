@@ -5,6 +5,8 @@ import MessageBubble from './MessageBubble'
 import SpaceToggle from './SpaceToggle'
 import ModelSelector from './ModelSelector'
 import type { ModelId } from '@/lib/models'
+import dynamic from 'next/dynamic'
+const ChibiCat3D = dynamic(() => import('@/components/ChibiCat3D'), { ssr: false })
 
 interface Message {
   role: 'user' | 'assistant'
@@ -13,13 +15,7 @@ interface Message {
 }
 
 export default function ChatInterface({ isPro = false }: { isPro?: boolean }) {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: 'assistant',
-      content: "Hi! I'm Proceriq, your personal AI with persistent memory. Every conversation we have is saved and I'll remember relevant context for future chats. What's on your mind today? 🧠",
-      memoryCount: 0
-    }
-  ])
+  const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [space, setSpace] = useState('work')
   const [model, setModel] = useState<ModelId>('openai/gpt-4o-mini')
@@ -141,6 +137,18 @@ export default function ChatInterface({ isPro = false }: { isPro?: boolean }) {
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-4 py-6">
+
+        {/* Welcome mascot — only when no messages yet */}
+        {messages.length === 0 && (
+          <div className="flex flex-col items-center justify-center h-full gap-2 py-8">
+            <ChibiCat3D size={300} />
+            <p className="text-gray-400 text-lg font-medium">Hi! I&apos;m Proceriq 🧠</p>
+            <p className="text-gray-600 text-sm text-center max-w-xs">
+              Your AI with persistent memory.<br />Every conversation is remembered.
+            </p>
+          </div>
+        )}
+
         {messages.map((msg, i) => (
           <MessageBubble key={i} message={msg} />
         ))}

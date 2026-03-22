@@ -1,4 +1,7 @@
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+const ChibiCat3D = dynamic(() => import('@/components/ChibiCat3D'), { ssr: false })
 
 export default function LandingPage() {
   return (
@@ -38,9 +41,15 @@ export default function LandingPage() {
             <span className="text-indigo-400">Every AI conversation,</span><br />
             remembered.
           </h1>
-          <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             Persistent memory for every AI you use. Every conversation, every insight, every idea — stored and recalled when you need it most.
           </p>
+
+          {/* Mascot — small, centered above CTAs */}
+          <div className="flex justify-center mb-4">
+            <ChibiCat3D size={160} />
+          </div>
+
           <div className="flex items-center justify-center gap-4 flex-wrap">
             <Link
               href="/auth/login"
@@ -59,7 +68,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Feature cards */}
       <section className="px-6 py-16">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-white mb-12">Everything your AI needs to know about you</h2>
@@ -159,6 +167,8 @@ export default function LandingPage() {
           <p className="text-gray-600 text-sm">© 2026 Proceriq. All rights reserved.</p>
         </div>
       </footer>
+    
+
     </div>
   )
 }
