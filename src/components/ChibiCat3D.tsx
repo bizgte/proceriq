@@ -49,9 +49,10 @@ function ChibiMesh({ catState }: { catState: string }) {
     // Blink (every ~3.5s)
     const blinkPhase = t % 3.5
     const eyeScaleY = blinkPhase < 0.1 ? Math.max(0.05, Math.sin(blinkPhase * Math.PI / 0.1)) : 1
+    const EYE_BASE = 0.14
     if (eyeLRef.current) {
-      eyeLRef.current.scale.y = eyeScaleY
-      eyeRRef.current.scale.y = eyeScaleY
+      eyeLRef.current.scale.y = EYE_BASE * eyeScaleY
+      eyeRRef.current.scale.y = EYE_BASE * eyeScaleY
     }
 
     // Wave — left arm swings up
@@ -119,20 +120,20 @@ function ChibiMesh({ catState }: { catState: string }) {
 
         {/* ── Eyes ── on the front face (+Z hemisphere) */}
         <mesh ref={eyeLRef} castShadow material={eyeMat}
-              position={[-0.38, 0.12, 1.48]} scale={[0.18, 0.18, 0.02]}>
+              position={[-0.38, 0.12, 1.48]} scale={[0.14, 0.14, 0.02]}>
           <sphereGeometry args={[1, 24, 24]} />
         </mesh>
         {/* Left eye shine */}
-        <mesh material={shineMat} position={[-0.28, 0.22, 1.50]} scale={[0.065, 0.065, 0.05]}>
+        <mesh material={shineMat} position={[-0.28, 0.22, 1.50]} scale={[0.093, 0.093, 0.03]}>
           <sphereGeometry args={[1, 12, 12]} />
         </mesh>
 
         <mesh ref={eyeRRef} castShadow material={eyeMat}
-              position={[0.38, 0.12, 1.48]} scale={[0.18, 0.18, 0.02]}>
+              position={[0.38, 0.12, 1.48]} scale={[0.14, 0.14, 0.02]}>
           <sphereGeometry args={[1, 24, 24]} />
         </mesh>
         {/* Right eye shine */}
-        <mesh material={shineMat} position={[0.48, 0.22, 1.50]} scale={[0.065, 0.065, 0.05]}>
+        <mesh material={shineMat} position={[0.48, 0.22, 1.50]} scale={[0.093, 0.093, 0.03]}>
           <sphereGeometry args={[1, 12, 12]} />
         </mesh>
 
@@ -171,6 +172,16 @@ function ChibiMesh({ catState }: { catState: string }) {
           <sphereGeometry args={[1, 20, 20]} />
         </mesh>
       </group>
+
+
+      {/* ── LEGS / FEET ── simple blobs, no toes */}
+      {([-0.50, 0.50] as number[]).map((x, i) => (
+        <mesh key={i} castShadow material={bodyMat}
+              position={[x, -0.92, 0.15]}
+              scale={[0.42, 0.30, 0.48]}>
+          <sphereGeometry args={[1, 20, 20]} />
+        </mesh>
+      ))}
 
       {/* ── TAIL ── behind the body (-Z) curling up */}
       <group ref={tailRef} position={[0.55, -0.30, -0.80]}>
