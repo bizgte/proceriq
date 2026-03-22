@@ -119,41 +119,41 @@ function ChibiMesh({ catState }: { catState: string }) {
 
         {/* ── Eyes ── on the front face (+Z hemisphere) */}
         <mesh ref={eyeLRef} castShadow material={eyeMat}
-              position={[-0.38, 0.12, 1.02]} scale={[0.22, 0.22, 0.10]}>
+              position={[-0.38, 0.12, 1.42]} scale={[0.22, 0.22, 0.10]}>
           <sphereGeometry args={[1, 24, 24]} />
         </mesh>
         {/* Left eye shine */}
-        <mesh material={shineMat} position={[-0.28, 0.22, 1.10]} scale={[0.065, 0.065, 0.05]}>
+        <mesh material={shineMat} position={[-0.28, 0.22, 1.50]} scale={[0.065, 0.065, 0.05]}>
           <sphereGeometry args={[1, 12, 12]} />
         </mesh>
 
         <mesh ref={eyeRRef} castShadow material={eyeMat}
-              position={[0.38, 0.12, 1.02]} scale={[0.22, 0.22, 0.10]}>
+              position={[0.38, 0.12, 1.42]} scale={[0.22, 0.22, 0.10]}>
           <sphereGeometry args={[1, 24, 24]} />
         </mesh>
         {/* Right eye shine */}
-        <mesh material={shineMat} position={[0.48, 0.22, 1.10]} scale={[0.065, 0.065, 0.05]}>
+        <mesh material={shineMat} position={[0.48, 0.22, 1.50]} scale={[0.065, 0.065, 0.05]}>
           <sphereGeometry args={[1, 12, 12]} />
         </mesh>
 
         {/* ── Cheeks ── rosy blush circles on front face */}
-        <mesh material={cheekMat} position={[-0.60, -0.05, 0.92]} scale={[0.28, 0.20, 0.08]}>
+        <mesh material={cheekMat} position={[-0.60, -0.05, 1.32]} scale={[0.28, 0.20, 0.08]}>
           <sphereGeometry args={[1, 16, 16]} />
         </mesh>
-        <mesh material={cheekMat} position={[0.60, -0.05, 0.92]} scale={[0.28, 0.20, 0.08]}>
+        <mesh material={cheekMat} position={[0.60, -0.05, 1.32]} scale={[0.28, 0.20, 0.08]}>
           <sphereGeometry args={[1, 16, 16]} />
         </mesh>
 
         {/* ── Nose ── small pink dot below eyes */}
-        <mesh material={noseMat} position={[0, -0.12, 1.12]} scale={[0.10, 0.07, 0.07]}>
+        <mesh material={noseMat} position={[0, -0.12, 1.50]} scale={[0.10, 0.07, 0.07]}>
           <sphereGeometry args={[1, 16, 16]} />
         </mesh>
 
         {/* ── Mouth ── tiny smile arc (two small spheres) */}
-        <mesh material={noseMat} position={[-0.14, -0.26, 1.10]} scale={[0.06, 0.04, 0.04]} rotation={[0, 0, 0.5]}>
+        <mesh material={noseMat} position={[-0.14, -0.26, 1.50]} scale={[0.06, 0.04, 0.04]} rotation={[0, 0, 0.5]}>
           <sphereGeometry args={[1, 10, 10]} />
         </mesh>
-        <mesh material={noseMat} position={[0.14, -0.26, 1.10]} scale={[0.06, 0.04, 0.04]} rotation={[0, 0, -0.5]}>
+        <mesh material={noseMat} position={[0.14, -0.26, 1.50]} scale={[0.06, 0.04, 0.04]} rotation={[0, 0, -0.5]}>
           <sphereGeometry args={[1, 10, 10]} />
         </mesh>
       </group>
