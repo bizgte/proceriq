@@ -85,7 +85,7 @@ function ChibiMesh({ catState }: { catState: string }) {
   const bellyMat = new THREE.MeshStandardMaterial({ color: '#fdf0ea', roughness: 0.95, transparent: true, opacity: 0.75 })
 
   return (
-    <group ref={groupRef}>
+    <group ref={groupRef} position={[0, -0.6, 0]}>
 
       {/* ── BODY ── centered at origin, slightly wider than tall */}
       <mesh castShadow material={bodyMat} scale={[1.05, 0.95, 0.95]}>
@@ -224,7 +224,7 @@ export default function ChibiCat3D({ size = 300 }: { size?: number }) {
          onClick={() => trigger('waving')}
          title="Click me!">
       <Canvas
-        camera={{ position: [0, 1.5, 7], fov: 35 }}
+        camera={{ position: [0, 0.6, 10], fov: 28 }}
         shadows
         gl={{ antialias: true, alpha: true }}
         style={{ background: 'transparent' }}
@@ -250,7 +250,7 @@ export default function ChibiCat3D({ size = 300 }: { size?: number }) {
           minAzimuthAngle={-Math.PI / 2.5}
           maxAzimuthAngle={Math.PI / 2.5}
           autoRotate
-          autoRotateSpeed={0.5}
+          autoRotateSpeed={0.4}
         />
       </Canvas>
       <div style={{
