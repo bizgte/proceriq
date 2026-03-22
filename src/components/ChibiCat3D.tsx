@@ -99,27 +99,27 @@ function ChibiMesh({ catState }: { catState: string }) {
       {/* ── HEAD ── sits above body, face pointing toward +Z */}
       <group ref={headRef} position={[0, 1.55, 0]}>
         {/* Main head sphere — slightly larger than body */}
-        <mesh castShadow material={bodyMat} scale={[1.18, 1.12, 1.15]}>
+        <mesh castShadow material={bodyMat} scale={[1.53, 1.46, 1.50]}>
           <sphereGeometry args={[1, 32, 32]} />
         </mesh>
 
         {/* ── Ears ── top-left and top-right of head */}
-        <mesh castShadow material={bodyMat} position={[-0.65, 0.88, 0]} rotation={[0, 0, -0.18]}>
+        <mesh castShadow material={bodyMat} position={[-0.78, 1.05, 0]} rotation={[0, 0, -0.18]}>
           <coneGeometry args={[0.27, 0.58, 14]} />
         </mesh>
-        <mesh material={earMat} position={[-0.62, 0.84, 0.04]} rotation={[0, 0, -0.18]} scale={[0.6, 0.85, 0.5]}>
+        <mesh material={earMat} position={[-0.74, 1.01, 0.04]} rotation={[0, 0, -0.18]} scale={[0.6, 0.85, 0.5]}>
           <coneGeometry args={[0.27, 0.58, 14]} />
         </mesh>
-        <mesh castShadow material={bodyMat} position={[0.65, 0.88, 0]} rotation={[0, 0, 0.18]}>
+        <mesh castShadow material={bodyMat} position={[0.78, 1.05, 0]} rotation={[0, 0, 0.18]}>
           <coneGeometry args={[0.27, 0.58, 14]} />
         </mesh>
-        <mesh material={earMat} position={[0.62, 0.84, 0.04]} rotation={[0, 0, 0.18]} scale={[0.6, 0.85, 0.5]}>
+        <mesh material={earMat} position={[0.74, 1.01, 0.04]} rotation={[0, 0, 0.18]} scale={[0.6, 0.85, 0.5]}>
           <coneGeometry args={[0.27, 0.58, 14]} />
         </mesh>
 
         {/* ── Eyes ── on the front face (+Z hemisphere) */}
         <mesh ref={eyeLRef} castShadow material={eyeMat}
-              position={[-0.38, 0.12, 1.02]} scale={[0.20, 0.14, 0.10]}>
+              position={[-0.38, 0.12, 1.02]} scale={[0.22, 0.22, 0.10]}>
           <sphereGeometry args={[1, 24, 24]} />
         </mesh>
         {/* Left eye shine */}
@@ -128,7 +128,7 @@ function ChibiMesh({ catState }: { catState: string }) {
         </mesh>
 
         <mesh ref={eyeRRef} castShadow material={eyeMat}
-              position={[0.38, 0.12, 1.02]} scale={[0.20, 0.14, 0.10]}>
+              position={[0.38, 0.12, 1.02]} scale={[0.22, 0.22, 0.10]}>
           <sphereGeometry args={[1, 24, 24]} />
         </mesh>
         {/* Right eye shine */}
